@@ -69,6 +69,24 @@ window.addEventListener("DOMContentLoaded", function () {
 
 });
 window.addEventListener("DOMContentLoaded", function () {
+    const backToTopBtn = document.getElementById("back-to-top");
+
+// Detectează scroll
+window.addEventListener("scroll", function () {
+  if (window.scrollY > 300) {
+    backToTopBtn.classList.remove("hidden");
+  } else {
+    backToTopBtn.classList.add("hidden");
+  }
+});
+
+// Scroll smooth la click
+backToTopBtn.addEventListener("click", function () {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+});
   const headings = document.querySelectorAll("main h2");
 
   headings.forEach(function (h2) {

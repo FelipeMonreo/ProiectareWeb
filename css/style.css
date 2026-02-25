@@ -192,3 +192,24 @@ main h2 {
   cursor: pointer;
   user-select: none;
 }
+#back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: none;
+
+  background: var(--primary-color);
+  color: var(--text-color);
+
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  transition: 0.3s ease;
+  z-index: 1000;
+}
+
+#back-to-top:hover {
+  transform: translateY(-3px);
+}
