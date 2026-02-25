@@ -68,3 +68,27 @@ window.addEventListener("DOMContentLoaded", function () {
   });
 
 });
+window.addEventListener("DOMContentLoaded", function () {
+  const headings = document.querySelectorAll("main h2");
+
+  headings.forEach(function (h2) {
+    // indicator inițial
+    h2.textContent = "▼ " + h2.textContent;
+
+    h2.addEventListener("click", function () {
+      let el = this.nextElementSibling;
+
+      // aflăm dacă e ascuns (ne uităm la primul element de după h2)
+      const isHidden = el && el.classList.contains("hidden");
+
+      // schimbăm indicatorul
+      this.textContent = (isHidden ? "▼ " : "▶ ") + this.textContent.slice(2);
+
+      // toggle pe toate elementele până se termină secțiunea
+      while (el) {
+        el.classList.toggle("hidden");
+        el = el.nextElementSibling;
+      }
+    });
+  });
+});

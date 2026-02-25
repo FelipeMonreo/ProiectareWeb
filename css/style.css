@@ -184,3 +184,11 @@ body.light-mode{
 --input-border: #cdb4db;
 --focus-ring: rgba(255, 143, 171, 0.35);
 }
+.hidden {
+  display: none;
+}
+
+main h2 {
+  cursor: pointer;
+  user-select: none;
+}
