@@ -54,7 +54,7 @@
     <footer>
   <h2 id="contact">Contact</h2>
 
-  <form action="#" method="post" aria-labelledby="contact">
+  <form action="#" method="post" novalidate>
     <div class="form-group">
       <label for="name">Nume</label>
       <input type="text" id="name" name="name" required />
@@ -70,7 +70,8 @@
       <textarea id="message" name="message" rows="4" required></textarea>
     </div>
 
-    <button type="button" class="btn-toxic" onclick="submitForm()">Trimite</button>
+    <button type="submit" class="btn-toxic">Trimite</button>
+    <p id="form-feedback"></p>
   </form>
 
   <p>&copy; 2026 Nume Prenume. Toate drepturile rezervate.</p>
