@@ -9,6 +9,10 @@
   --background-color: #0b0f0b;
   --text-color: #eaffea;
   --card-color: #111a11;
+  --input-bg: #0a120a;
+--input-text: #eaffea;
+--input-border: rgba(57, 255, 20, 0.35);
+--focus-ring: rgba(57, 255, 20, 0.25);
 }
 body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -117,19 +121,21 @@ label{
     font-weight: 700;
 }
 input,
-textarea{
-    width: 100%;
-    padding: 10px 12px;
-    border-radius: 10px;
-    border: 2px solid rgba(57,255,20,0.35);
-    background: #0a120a;
-    color: var(--text-color);
-    outline: none;
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+
+  background: var(--input-bg);
+  color: var(--input-text);
+  border: 2px solid var(--input-border);
+
+  outline: none;
 }
 input:focus,
-textarea:focus{
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 4px rgba(57,255,20,0.35);
+textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px var(--focus-ring);
 }
 button[type="submit"] {
   justify-self: start;
@@ -166,4 +172,15 @@ button[type="submit"]:focus {
 
 .btn-toxic:hover {
   background: #00ff00;
+}
+body.light-mode{
+  --background-color: #ff00c8;
+  --text-color: #730ca3;
+  --card-color: #ffffff;
+  --primary-color: #ff8fab;
+  --secondary-color: #cdb4db;
+  --input-bg: #ffd6e8;
+--input-text: #8a004f;
+--input-border: #cdb4db;
+--focus-ring: rgba(255, 143, 171, 0.35);
 }

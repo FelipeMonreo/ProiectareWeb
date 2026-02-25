@@ -51,3 +51,20 @@ window.addEventListener("DOMContentLoaded", function () {
   }
 
 });
+window.addEventListener("DOMContentLoaded", function () {
+
+  const toggleBtn = document.getElementById("theme-toggle");
+
+  toggleBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    document.body.classList.toggle("light-mode");
+
+    if (document.body.classList.contains("light-mode")) {
+      toggleBtn.textContent = "🌙 Dark Mode";
+    } else {
+      toggleBtn.textContent = "🌸 Light Mode";
+    }
+  });
+
+});
