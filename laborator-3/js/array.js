@@ -34,3 +34,25 @@ const totalYears = educationArray.reduce((total, item) => {
 }, 0);
 
 console.log("Total ani de studiu:", totalYears);
+
+const projects = [
+  { name: "Pagina personala", tech: "HTML, CSS", done: true },
+  { name: "Formular contact", tech: "HTML, JS", done: true },
+  { name: "Dark Mode Website", tech: "CSS, JS", done: true },
+  { name: "ToDo App", tech: "JavaScript", done: false }
+];
+const projectsList = document.getElementById("projects-list");
+
+projectsList.innerHTML = projects
+  .map(project => 
+    `<li>
+      <strong>${project.name}</strong> - ${project.tech}
+      ${project.done ? "✅" : "❌"}
+    </li>`
+  )
+  .join("");
+  const completed = projects.filter(project => project.done).length;
+const total = projects.length;
+
+document.getElementById("projects-summary").textContent =
+  `Finalizate: ${completed} din ${total}`;
