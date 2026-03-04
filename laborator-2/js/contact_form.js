@@ -50,9 +50,6 @@ window.addEventListener("DOMContentLoaded", function () {
     paragraf.textContent = "Seara buna si somn usor draga pasarica <3!";
   }
 
-});
-window.addEventListener("DOMContentLoaded", function () {
-
   const toggleBtn = document.getElementById("theme-toggle");
 
   toggleBtn.addEventListener("click", function (e) {
@@ -67,46 +64,41 @@ window.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-});
-window.addEventListener("DOMContentLoaded", function () {
-    const backToTopBtn = document.getElementById("back-to-top");
+  const backToTopBtn = document.getElementById("back-to-top");
 
-// Detectează scroll
-window.addEventListener("scroll", function () {
-  if (window.scrollY > 300) {
-    backToTopBtn.classList.remove("hidden");
-  } else {
-    backToTopBtn.classList.add("hidden");
-  }
-});
-
-// Scroll smooth la click
-backToTopBtn.addEventListener("click", function () {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
+  window.addEventListener("scroll", function () {
+    if (window.scrollY > 300) {
+      backToTopBtn.classList.remove("hidden");
+    } else {
+      backToTopBtn.classList.add("hidden");
+    }
   });
-});
+
+  backToTopBtn.addEventListener("click", function () {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+
+
   const headings = document.querySelectorAll("main h2");
 
   headings.forEach(function (h2) {
-    // indicator inițial
     h2.textContent = "▼ " + h2.textContent;
 
     h2.addEventListener("click", function () {
-      let el = this.nextElementSibling;
 
-      // aflăm dacă e ascuns (ne uităm la primul element de după h2)
+      let el = this.nextElementSibling;
       const isHidden = el && el.classList.contains("hidden");
 
-      // schimbăm indicatorul
       this.textContent = (isHidden ? "▼ " : "▶ ") + this.textContent.slice(2);
 
-      // toggle pe toate elementele până se termină secțiunea
       while (el) {
         el.classList.toggle("hidden");
         el = el.nextElementSibling;
       }
     });
   });
+
 });
