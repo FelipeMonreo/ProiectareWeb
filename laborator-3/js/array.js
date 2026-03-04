@@ -16,3 +16,21 @@ const filterUniversitate=educationArray.filter(function(item) {
     return item.includes("Universitate");
 });
 console.log("Filtru Universitate: ", filterUniversitate);
+const currentYear = new Date().getFullYear();
+
+const totalYears = educationArray.reduce((total, item) => {
+
+  const years = item.match(/\d{4}/g);
+
+  if (years) {
+    const start = parseInt(years[0]);
+    const end = years[1] ? parseInt(years[1]) : currentYear;
+
+    return total + (end - start);
+  }
+
+  return total;
+
+}, 0);
+
+console.log("Total ani de studiu:", totalYears);
