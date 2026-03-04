@@ -56,3 +56,36 @@ const total = projects.length;
 
 document.getElementById("projects-summary").textContent =
   `Finalizate: ${completed} din ${total}`;
+  async function loadProjects() {
+  try {
+    const response = await fetch("data/projects.json");
+
+    if (!response.ok) {
+      throw new Error("HTTP error: " + response.status);
+    }
+
+    const projects = await response.json();
+
+    const projectsList = document.getElementById("projects-list");
+    const summary = document.getElementById("projects-summary");
+
+    projectsList.innerHTML = projects
+      .map(p => `<li><strong>${p.name}</strong> - ${p.tech} ${p.done ? "✅" : "❌"}</li>`)
+      .join("");
+
+    const completed = projects.filter(p => p.done).length;
+    summary.textContent = `Finalizate: ${completed} din ${projects.length}`;
+  } catch (error) {
+    console.error("Eroare la încărcarea proiectelor:", error);
+
+    const summary = document.getElementById("projects-summary");
+    if (summary) {
+      summary.textContent = "Nu am putut încărca proiectele. Verifică Live Server + calea către JSON.";
+      summary.style.color = "red";
+    }
+  }
+}
+
+window.addEventListener("DOMContentLoaded", function () {
+  loadProjects();
+});
