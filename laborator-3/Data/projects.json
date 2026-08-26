@@ -1,6 +1,0 @@
-[
-  { "name": "Pagina personala", "tech": "HTML, CSS", "done": true },
-  { "name": "Formular contact", "tech": "HTML, JS", "done": true },
-  { "name": "Tema Light/Dark", "tech": "CSS, JS", "done": true },
-  { "name": "ToDo App", "tech": "JavaScript", "done": false }
-]
