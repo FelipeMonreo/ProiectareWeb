@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Card from './Card';
 const projects = [
   {
@@ -23,12 +24,14 @@ const projects = [
 ];
 
 function App() {
+  const [count, setCount] = useState(0);
   return (
     <div>
       <header>
         <h1>Dashboard</h1>
-        <p>Salut! Acesta este primul meu proiect React.</p>
+        <p>Salut! Ma cheama Filip Tanase</p>
       </header>
+      
       <hr />
 
       <main>
@@ -36,6 +39,7 @@ function App() {
         <p>
           Numele meu este Filip și învăț să dezvolt aplicații folosind React.
         </p>
+        
 
         <h2>Hobby-uri</h2>
 
@@ -65,7 +69,11 @@ function App() {
     />
   );
 })}
-
+<h2>Counter</h2>
+            <p>Ai apasat de {count} ori</p>
+            <button onClick={() => setCount(count + 1)}>
+  Click
+</button>
         <h2>Contact</h2>
 
         <p>Email:</p>
