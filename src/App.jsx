@@ -1,3 +1,5 @@
+import Card from './Card';
+
 function App() {
   return (
     <div>
@@ -5,7 +7,7 @@ function App() {
         <h1>Dashboard</h1>
         <p>Salut! Acesta este primul meu proiect React.</p>
       </header>
-
+      <Card />
       <hr />
 
       <main>
