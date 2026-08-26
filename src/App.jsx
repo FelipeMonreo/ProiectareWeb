@@ -7,7 +7,6 @@ function App() {
         <h1>Dashboard</h1>
         <p>Salut! Acesta este primul meu proiect React.</p>
       </header>
-      <Card />
       <hr />
 
       <main>
@@ -36,15 +35,20 @@ function App() {
 
         <h2>Proiecte</h2>
 
-        <article>
-          <h3>Proiect 1</h3>
-          <p>Un website realizat cu HTML și CSS.</p>
-        </article>
+        <Card
+  title="Proiect 1"
+  description="Un website realizat cu HTML și CSS."
+/>
 
-        <article>
-          <h3>Proiect 2</h3>
-          <p>Un joc solitaire realizat in HTML</p>
-        </article>
+<Card
+  title="Proiect 2"
+  description="Joc solitaire in HTML"
+/>
+
+<Card
+  title="Proiect 3"
+  description="Dashboard cu React"
+/>
 
         <h2>Contact</h2>
 

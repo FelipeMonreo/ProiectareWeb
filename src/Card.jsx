@@ -1,10 +1,8 @@
-function Card() {
+function Card(props) {
   return (
     <div>
-      <h2>Proiectul meu</h2>
-      <p>
-        Acesta este primul meu card realizat folosind o componentă React.
-      </p>
+      <h2>{props.title}</h2>
+      <p>{props.description}</p>
     </div>
   );
 }
