@@ -72,7 +72,13 @@ function App() {
 <h2>Counter</h2>
             <p>Ai apasat de {count} ori</p>
             <button onClick={() => setCount(count + 1)}>
-  Click
+  +1
+</button>
+<button onClick={() => setCount(count - 1)}>
+  -1
+</button>
+<button onClick={() => setCount(0)}>
+  Reset
 </button>
         <h2>Contact</h2>
 
