@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Card from './Card';
+import QuickNote from './QuickNote';
 const projects = [
   {
     title: "Proiect 1",
@@ -50,6 +51,8 @@ function App() {
           <li>Programare</li>
           <li>Tatuajele</li>
         </ul>
+
+        <QuickNote />
 
         <h2>Obiective</h2>
 
