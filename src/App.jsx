@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Card from './Card';
 import QuickNote from './QuickNote';
+import TodoList from './TodoList';
 const projects = [
   {
     title: "Proiect 1",
@@ -136,6 +137,8 @@ function App() {
           </tbody>
         </table>
 
+        <TodoList />
+        
         <h2>Progres React</h2>
 
         <progress value="20" max="100">
