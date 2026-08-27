@@ -146,8 +146,8 @@ function App() {
 
         <h2>Progres React</h2>
 
-        <progress value="20" max="100">
-          20%
+        <progress value="30" max="100">
+          30%
         </progress>
       </main>
 
