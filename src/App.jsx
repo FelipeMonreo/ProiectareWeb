@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Card from './Card';
 import QuickNote from './QuickNote';
 import TodoList from './TodoList';
+import ContactForm from './ContactForm';
 const projects = [
   {
     title: "Proiect 1",
@@ -104,6 +105,8 @@ function App() {
           alt="Imagine exemplu"
         />
 
+        <ContactForm />
+
         <h2>Abilități</h2>
 
         <table border="1">
@@ -138,7 +141,7 @@ function App() {
         </table>
 
         <TodoList />
-        
+
         <h2>Progres React</h2>
 
         <progress value="20" max="100">
