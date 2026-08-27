@@ -3,6 +3,7 @@ import Card from './Card';
 import QuickNote from './QuickNote';
 import TodoList from './TodoList';
 import ContactForm from './ContactForm';
+import Clock from './Clock';
 const projects = [
   {
     title: "Proiect 1",
@@ -34,6 +35,7 @@ function App() {
         <h1>Dashboard</h1>
         <p>Salut! Ma cheama Filip Tanase</p>
       </header>
+      <Clock />
       
       <hr />
 
