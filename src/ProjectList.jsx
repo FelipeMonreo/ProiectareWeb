@@ -5,6 +5,13 @@ function ProjectList() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [search, setSearch] = useState('');
+  const total = projects.length;
+const completed = projects.filter(function(project) {
+  return project.done === true;
+}).length;
+const inProgress = projects.filter(function(project) {
+  return project.done === false;
+}).length;
 
   useEffect(function() {
     fetch('/data/projects.json')
@@ -42,6 +49,11 @@ function ProjectList() {
         onChange={(e) => setSearch(e.target.value)}
         />
       <h3>Proiecte</h3>
+      <div>
+        <p>Total proiecte: {total}</p>
+        <p>Finalizate: {completed}</p>
+        <p>In Lucru: {inProgress}</p>
+      </div>
 
       <ul>
         {projects
