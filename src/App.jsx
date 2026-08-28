@@ -5,6 +5,7 @@ import TodoList from './TodoList';
 import ContactForm from './ContactForm';
 import Clock from './Clock';
 import ProjectList from './ProjectList';
+import UsersList from './UsersList';
 const projects = [
   {
     title: "Proiect 1",
@@ -136,7 +137,7 @@ function App() {
         </table>
 
         <TodoList />
-
+        <UsersList />
         <h2>Progres React</h2>
 
         <progress value="30" max="100">
