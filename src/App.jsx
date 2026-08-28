@@ -4,6 +4,7 @@ import QuickNote from './QuickNote';
 import TodoList from './TodoList';
 import ContactForm from './ContactForm';
 import Clock from './Clock';
+import ProjectList from './ProjectList';
 const projects = [
   {
     title: "Proiect 1",
@@ -66,16 +67,8 @@ function App() {
           <li>Să învăț HTML mai bine</li>
         </ol>
 
-        <h2>Proiecte</h2>
-        {projects.map(function(item, index) {
-  return (
-    <Card
-      key={index}
-      title={item.title}
-      description={item.description}
-    />
-  );
-})}
+        <ProjectList/>
+
 <h2>Counter</h2>
             <p>Ai apasat de {count} ori</p>
             <button onClick={() => setCount(count + 1)}>
