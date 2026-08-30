@@ -5,6 +5,7 @@ import Projects from './Pages/Projects';
 import Contact from './Pages/Contact';
 import Navbar from './Navbar';
 import './App.css';
+import NotFound from './Pages/NotFound';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
