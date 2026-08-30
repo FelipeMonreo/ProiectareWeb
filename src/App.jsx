@@ -7,21 +7,27 @@ import Navbar from './Navbar';
 import './App.css';
 import About from './Pages/About';
 import NotFound from './Pages/NotFound';
-
+import Footer from './Footer';
 
 function App() {
   return (
     <BrowserRouter>
-    <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/about" element={<About />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <div className="app">
+        <Navbar />
+
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<About />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
+
+        <Footer />
+      </div>
     </BrowserRouter>
   );
 }
-
 export default App;
