@@ -1,6 +1,8 @@
 const express = require('express');
-
+const cors = require('cors');
 const app = express();
+app.use (cors());
+app.use(express.json());
 
 const PORT = 3000;
 
@@ -38,6 +40,20 @@ app.get('/', function(req, res) {
 app.get('/api/projects', function(req, res) {
     res.json(projects);
 });
+
+app.post('/api/projects', function(req, res) {
+    const newProject = {
+        id: projects.length + 1,
+        title: req.body.title,
+        tech: req.body.tech,
+        done: req.body.done || false
+    };
+
+    projects.push(newProject);
+
+    res.status(201).json(newProject);
+});
+
 app.get('/api/projects/:id', function(req, res) {
     const id = Number(req.params.id);
 
