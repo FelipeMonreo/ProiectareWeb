@@ -38,6 +38,36 @@ app.get('/', function(req, res) {
 app.get('/api/projects', function(req, res) {
     res.json(projects);
 });
+app.get('/api/projects/:id', function(req, res) {
+    const id = Number(req.params.id);
+
+    const project = projects.find(function(p) {
+        return p.id === id;
+    });
+
+    if (!project) {
+        return res.status(404).json({
+            error: 'Proiectul nu exista'
+        });
+    }
+
+    res.json(project);
+});
+app.get('/api/stats', function(req, res) {
+    const total = projects.length;
+
+    const done = projects.filter(function(p) {
+        return p.done === true;
+    }).length;
+
+    const pending = total - done;
+
+    res.json({
+        total: total,
+        done: done,
+        pending: pending
+    });
+});
 
 app.listen(PORT, function() {
     console.log('Server pornit pe http://localhost:' + PORT);
