@@ -69,6 +69,27 @@ app.get('/api/projects/:id', function(req, res) {
 
     res.json(project);
 });
+
+app.delete('/api/projects/:id', function(req, res) {
+    const id = parseInt(req.params.id);
+
+    const index = projects.findIndex(function(p) {
+        return p.id === id;
+    });
+
+    if (index === -1) {
+        return res.status(404).json({
+            error: 'Not found'
+        });
+    }
+
+    projects.splice(index, 1);
+
+    res.json({
+        message: 'Deleted'
+    });
+});
+
 app.get('/api/stats', function(req, res) {
     const total = projects.length;
 
