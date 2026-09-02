@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 
 function ProjectList() {
+  const [title, setTitle] = useState('');
+  const [tech, setTech] = useState('');
+  const [done, setDone] = useState(false);
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -32,6 +35,34 @@ const inProgress = projects.filter(function(project) {
       });
   }, []);
 
+ async function handleSubmit(event) {
+    event.preventDefault();
+
+    try {
+        const response = await fetch('http://localhost:3000/api/projects', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                title: title,
+                tech: tech,
+                done: done
+            })
+        });
+
+        const newProject = await response.json();
+
+        setProjects([...projects, newProject]);
+
+        setTitle('');
+        setTech('');
+        setDone(false);
+    } catch (err) {
+        console.error('Eroare:', err);
+    }
+}
+
   if (loading) {
     return <p>Se incarca...</p>;
   }
@@ -54,6 +85,40 @@ const inProgress = projects.filter(function(project) {
         <p>Finalizate: {completed}</p>
         <p>In Lucru: {inProgress}</p>
       </div>
+
+<form onSubmit={handleSubmit}>
+    <input
+        type="text"
+        placeholder="Titlu proiect"
+        value={title}
+        onChange={function(e) {
+            setTitle(e.target.value);
+        }}
+    />
+
+    <input
+        type="text"
+        placeholder="Tehnologii"
+        value={tech}
+        onChange={function(e) {
+            setTech(e.target.value);
+        }}
+    />
+
+    <select
+    value={done}
+    onChange={function(e) {
+        setDone(e.target.value === 'true');
+    }}
+>
+    <option value="false">În lucru</option>
+    <option value="true">Finalizat</option>
+</select>
+
+    <button type="submit">
+        Adaugă proiect
+    </button>
+</form>
 
       <ul>
         {projects
