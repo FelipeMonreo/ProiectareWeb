@@ -1,4 +1,5 @@
 const express = require('express');
+const Project = require('./models/Project');
 const cors = require('cors');
 const app = express();
 const mongoose = require('mongoose');
@@ -15,39 +16,17 @@ app.use(express.json());
 
 const PORT = 3000;
 
-const projects = [
-    {
-        id: 1,
-        title: 'Pagina Personala',
-        tech: 'HTML, CSS',
-        done: true
-    },
-    {
-        id: 2,
-        title: 'Solitaire HTML',
-        tech: 'HTML, CSS, JS',
-        done: true
-    },
-    {
-        id: 3,
-        title: 'Dashboard React',
-        tech: 'React',
-        done: false
-    },
-    {
-        id: 4,
-        title: 'API Meteo',
-        tech: 'React, API',
-        done: false
-    }
-];
-
 app.get('/', function(req, res) {
     res.json({ message: 'Serverul functioneaza!' });
 });
 
-app.get('/api/projects', function(req, res) {
-    res.json(projects);
+app.get('/api/projects', async function(req, res) {
+    try {
+        const projects = await Project.find();
+        res.json(projects);
+    } catch (err) {
+        res.status(500).json({ error: 'Eroare ' + err });
+    }
 });
 
 app.post('/api/projects', function(req, res) {
@@ -63,7 +42,7 @@ app.post('/api/projects', function(req, res) {
     res.status(201).json(newProject);
 });
 
-app.get('/api/projects/:id', function(req, res) {
+/* app.get('/api/projects/:id', function(req, res) {
     const id = Number(req.params.id);
 
     const project = projects.find(function(p) {
@@ -77,7 +56,7 @@ app.get('/api/projects/:id', function(req, res) {
     }
 
     res.json(project);
-});
+}); */
 
 app.delete('/api/projects/:id', function(req, res) {
     const id = parseInt(req.params.id);
@@ -127,7 +106,7 @@ app.put('/api/projects/:id', function(req, res) {
     res.json(project);
 });
 
-app.get('/api/stats', function(req, res) {
+/* app.get('/api/stats', function(req, res) {
     const total = projects.length;
 
     const done = projects.filter(function(p) {
@@ -141,7 +120,7 @@ app.get('/api/stats', function(req, res) {
         done: done,
         pending: pending
     });
-});
+}); */
 
 app.listen(PORT, function() {
     console.log('Server pornit pe http://localhost:' + PORT);
