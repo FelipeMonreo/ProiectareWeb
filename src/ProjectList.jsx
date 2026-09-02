@@ -14,7 +14,7 @@ const inProgress = projects.filter(function(project) {
 }).length;
 
   useEffect(function() {
-    fetch('/data/projects.json')
+    fetch('http://localhost:3000/api/projects')
       .then(function(response) {
         if (!response.ok) {
           throw new Error('Eroare la încărcarea datelor.');
@@ -23,7 +23,7 @@ const inProgress = projects.filter(function(project) {
         return response.json();
       })
       .then(function(data) {
-        setProjects(data.projects);
+        setProjects(data);
         setLoading(false);
       })
       .catch(function(error) {
