@@ -63,6 +63,22 @@ const inProgress = projects.filter(function(project) {
     }
 }
 
+  async function handleDelete(id) {
+    try {
+        await fetch('http://localhost:3000/api/projects/' + id, {
+            method: 'DELETE'
+        });
+
+        setProjects(
+            projects.filter(function(p) {
+                return p._id !== id;
+            })
+        );
+    } catch (err) {
+        console.error('Eroare:', err);
+    }
+}
+
   if (loading) {
     return <p>Se incarca...</p>;
   }
@@ -129,13 +145,18 @@ const inProgress = projects.filter(function(project) {
   })
         .map(function(project) {
           return (
-            <li key={project.id}>
+            <li key={project._id}>
               <strong>{project.title}</strong>
               <span> - {project.tech}</span>
 
               <span>
                 {project.done ? ' - Finalizat' : ' - În lucru'}
               </span>
+              <button onClick={function() {
+    handleDelete(project._id);
+  }}>
+    Șterge
+  </button>
             </li>
           );
         })}
