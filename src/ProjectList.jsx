@@ -11,6 +11,8 @@ function ProjectList() {
   const [editTitle, setEditTitle] = useState('');
   const [editTech, setEditTech] = useState('');
   const [search, setSearch] = useState('');
+  const [statusFilter, setStatusFilter] = useState('all');
+  const [sortBy, setSortBy] = useState('title');
   const total = projects.length;
   const completed = projects.filter(function(project) {
 	return project.done === true;
@@ -162,12 +164,36 @@ async function handleSave() {
       <h3>Proiecte</h3>
 	  
 	  	  <input
+        className='search-input'
 		type="text"
 		placeholder="Cauta proiect..."
 		value={search}
 		onChange={(e) => setSearch(e.target.value)}
       />
+
+      <select
+      className='project-input'
+    value={statusFilter}
+    onChange={function(e) {
+        setStatusFilter(e.target.value);
+    }}
+>
+    <option value="all">Toate</option>
+    <option value="done">Finalizate</option>
+    <option value="pending">În lucru</option>
+</select>
 	  
+    <select
+    className='project-input'
+    value={sortBy}
+    onChange={function(e) {
+        setSortBy(e.target.value);
+    }}
+>
+    <option value="title">Sortează după titlu</option>
+    <option value="id">Sortează după dată</option>
+</select>
+
 	<div>
       <p>Total proiecte: {total}</p>
 	  <p>Finalizate: {completed}</p>
@@ -194,6 +220,7 @@ async function handleSave() {
     />
 	
 	<select
+  className='project-input'
     value={done}
     onChange={function(e) {
         setDone(e.target.value === 'true');
@@ -211,12 +238,34 @@ async function handleSave() {
 
       <ul className='project-list'>
         {projects
-		.filter(function(project) {
-    return project.title 
-  .toLowerCase() 
-  .includes(search.toLowerCase()); 
-}) 
-.map(function(project) { 
+    .filter(function(project) {
+        return project.title
+            .toLowerCase()
+            .includes(search.toLowerCase());
+    })
+    .filter(function(project) {
+        if (statusFilter === 'done') {
+            return project.done === true;
+        }
+
+        if (statusFilter === 'pending') {
+            return project.done === false;
+        }
+
+        return true;
+    })
+    .sort(function(a, b) {
+        if (sortBy === 'title') {
+            return a.title.localeCompare(b.title);
+        }
+
+        if (sortBy === 'id') {
+            return a._id.localeCompare(b._id);
+        }
+
+        return 0;
+    })
+    .map(function(project) { 
 
   if (editingId === project._id) {
     return (
