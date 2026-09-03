@@ -1,20 +1,23 @@
 import { useState, useEffect } from 'react';
 
 function ProjectList() {
+  const [done, setDone] = useState(false);
   const [title, setTitle] = useState('');
   const [tech, setTech] = useState('');
-  const [done, setDone] = useState(false);
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [editingId, setEditingId] = useState(null);
+  const [editTitle, setEditTitle] = useState('');
+  const [editTech, setEditTech] = useState('');
   const [search, setSearch] = useState('');
   const total = projects.length;
-const completed = projects.filter(function(project) {
-  return project.done === true;
-}).length;
-const inProgress = projects.filter(function(project) {
-  return project.done === false;
-}).length;
+  const completed = projects.filter(function(project) {
+	return project.done === true;
+  }).length;
+  const inProgress = projects.filter(function(project) {
+	return project.done === false;
+  }).length;
 
   useEffect(function() {
     fetch('http://localhost:3000/api/projects')
@@ -30,12 +33,12 @@ const inProgress = projects.filter(function(project) {
         setLoading(false);
       })
       .catch(function(error) {
-        setError('Eroare la încărcarea datelor.');
+        setError('Eroare la incarcarea datelor.');
         setLoading(false);
       });
   }, []);
-
- async function handleSubmit(event) {
+  
+    async function handleSubmit(event) {
     event.preventDefault();
 
     try {
@@ -47,7 +50,7 @@ const inProgress = projects.filter(function(project) {
             body: JSON.stringify({
                 title: title,
                 tech: tech,
-                done: done
+				done: done
             })
         });
 
@@ -57,13 +60,13 @@ const inProgress = projects.filter(function(project) {
 
         setTitle('');
         setTech('');
-        setDone(false);
+		setDone(false);
     } catch (err) {
         console.error('Eroare:', err);
     }
 }
 
-  async function handleDelete(id) {
+async function handleDelete(id) {
     try {
         await fetch('http://localhost:3000/api/projects/' + id, {
             method: 'DELETE'
@@ -87,22 +90,56 @@ const inProgress = projects.filter(function(project) {
     return <p>{error}</p>;
   }
 
+  function handleEdit(project) {
+    setEditingId(project._id);
+    setEditTitle(project.title);
+    setEditTech(project.tech);
+}
+
+async function handleSave() {
+    const response = await fetch(
+        'http://localhost:3000/api/projects/' + editingId,
+        {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                title: editTitle,
+                tech: editTech
+            })
+        }
+    );
+
+    const updatedProject = await response.json();
+
+    setProjects(
+        projects.map(function(p) {
+            return p._id === editingId ? updatedProject : p;
+        })
+    );
+
+    setEditingId(null);
+}
+
   return (
     <div>
-        <input
-        type="text"
-        placeholder="Cauta proiect..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        />
       <h3>Proiecte</h3>
-      <div>
-        <p>Total proiecte: {total}</p>
-        <p>Finalizate: {completed}</p>
-        <p>In Lucru: {inProgress}</p>
-      </div>
-
-<form onSubmit={handleSubmit}>
+	  
+	  	  <input
+		type="text"
+		placeholder="Cauta proiect..."
+		value={search}
+		onChange={(e) => setSearch(e.target.value)}
+      />
+	  
+	<div>
+      <p>Total proiecte: {total}</p>
+	  <p>Finalizate: {completed}</p>
+	  <p>În lucru: {inProgress}</p>
+	</div>
+	  
+	<form onSubmit={handleSubmit}>
     <input
         type="text"
         placeholder="Titlu proiect"
@@ -120,8 +157,8 @@ const inProgress = projects.filter(function(project) {
             setTech(e.target.value);
         }}
     />
-
-    <select
+	
+	<select
     value={done}
     onChange={function(e) {
         setDone(e.target.value === 'true');
@@ -131,35 +168,78 @@ const inProgress = projects.filter(function(project) {
     <option value="true">Finalizat</option>
 </select>
 
-    <button type="submit">
+		<button type="submit">
         Adaugă proiect
-    </button>
-</form>
+		</button>
+	</form>
 
       <ul>
         {projects
-        .filter(function(project) {
-    return project.title
-      .toLowerCase()
-      .includes(search.toLowerCase());
-  })
-        .map(function(project) {
-          return (
-            <li key={project._id}>
-              <strong>{project.title}</strong>
-              <span> - {project.tech}</span>
+		.filter(function(project) {
+    return project.title 
+  .toLowerCase() 
+  .includes(search.toLowerCase()); 
+}) 
+.map(function(project) { 
 
-              <span>
-                {project.done ? ' - Finalizat' : ' - În lucru'}
-              </span>
-              <button onClick={function() {
-    handleDelete(project._id);
-  }}>
-    Șterge
-  </button>
-            </li>
-          );
-        })}
+  if (editingId === project._id) {
+    return (
+      <li key={project._id}>
+
+        <input
+          value={editTitle}
+          onChange={function(e) {
+            setEditTitle(e.target.value);
+          }}
+        />
+
+        <input
+          value={editTech}
+          onChange={function(e) {
+            setEditTech(e.target.value);
+          }}
+        />
+
+        <button onClick={handleSave}>
+          Salvează
+        </button>
+
+        <button onClick={function() {
+          setEditingId(null);
+        }}>
+          Anulează
+        </button>
+
+      </li>
+    );
+  }
+
+  return (
+    <li key={project._id}>
+
+      <strong>{project.title}</strong>
+
+      <span> - {project.tech}</span>
+
+      <span>
+        {project.done ? ' - Finalizat' : ' - În lucru'}
+      </span>
+
+      <button onClick={function() {
+        handleEdit(project);
+      }}>
+        Editează
+      </button>
+
+      <button onClick={function() {
+        handleDelete(project._id);
+      }}>
+        Șterge
+      </button>
+
+    </li>
+  );
+})}
       </ul>
     </div>
   );

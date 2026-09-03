@@ -83,32 +83,27 @@ app.delete('/api/projects/:id', async function(req, res) {
     }
 });
 
-app.put('/api/projects/:id', function(req, res) {
-    const id = parseInt(req.params.id);
+app.put('/api/projects/:id', async function(req, res) {
+    try {
+        const updated = await Project.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { returnDocument: 'after' }
+        );
 
-    const project = projects.find(function(p) {
-        return p.id === id;
-    });
+        if (!updated) {
+            return res.status(404).json({
+                error: 'Not found'
+            });
+        }
 
-    if (!project) {
-        return res.status(404).json({
-            error: 'Not found'
+        res.json(updated);
+
+    } catch (err) {
+        res.status(400).json({
+            error: err.message
         });
     }
-
-    if (req.body.title !== undefined) {
-        project.title = req.body.title;
-    }
-
-    if (req.body.tech !== undefined) {
-        project.tech = req.body.tech;
-    }
-
-    if (req.body.done !== undefined) {
-        project.done = req.body.done;
-    }
-
-    res.json(project);
 });
 
 /* app.get('/api/stats', function(req, res) {
