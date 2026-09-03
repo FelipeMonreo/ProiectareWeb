@@ -171,12 +171,13 @@ async function handleSave() {
     <option value="true">Finalizat</option>
 </select>
 
-		<button type="submit">
+		<button type="submit"
+    className='add-button'>
         Adaugă proiect
 		</button>
 	</form>
 
-      <ul>
+      <ul className='project-list'>
         {projects
 		.filter(function(project) {
     return project.title 
@@ -187,7 +188,9 @@ async function handleSave() {
 
   if (editingId === project._id) {
     return (
-      <li key={project._id}>
+      <li 
+      key={project._id}
+      className={project.done ? 'project-card done' : 'project-card progress'}>
 
         <input
           value={editTitle}
@@ -203,11 +206,11 @@ async function handleSave() {
           }}
         />
 
-        <button onClick={handleSave}>
+        <button onClick={handleSave} className='save-button'>
           Salvează
         </button>
 
-        <button onClick={function() {
+        <button className='cancel-button' onClick={function() {
           setEditingId(null);
         }}>
           Anulează
@@ -224,17 +227,21 @@ async function handleSave() {
 
       <span> - {project.tech}</span>
 
-      <span>
+      <span className={project.done ? 'status-done' : 'status-progress'}>
         {project.done ? ' - Finalizat' : ' - În lucru'}
       </span>
 
-      <button onClick={function() {
+      <button
+      className='edit-button'
+      onClick={function() {
         handleEdit(project);
       }}>
         Editează
       </button>
 
-      <button onClick={function() {
+      <button 
+      className='delete-button'
+      onClick={function() {
         handleDelete(project._id);
       }}>
         Șterge
