@@ -67,6 +67,9 @@ function ProjectList() {
 }
 
 async function handleDelete(id) {
+  if (!window.confirm('Sigur dorești să ștergi acest proiect?')) {
+        return;
+    }
     try {
         await fetch('http://localhost:3000/api/projects/' + id, {
             method: 'DELETE'
