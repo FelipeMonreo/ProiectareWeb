@@ -340,3 +340,12 @@ form input {
 button:hover {
   opacity: 0.85;
 }
+
+.toggle-button {
+    background-color: #27ae60;
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}

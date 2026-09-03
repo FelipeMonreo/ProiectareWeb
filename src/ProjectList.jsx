@@ -85,6 +85,38 @@ async function handleDelete(id) {
     }
 }
 
+async function handleToggle(id, currentDone) {
+    try {
+        const response = await fetch(
+            'http://localhost:3000/api/projects/' + id,
+            {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    done: !currentDone
+                })
+            }
+        );
+
+        const updatedProject = await response.json();
+
+        setProjects(
+            projects.map(function(p) {
+                if (p._id === id) {
+                    return updatedProject;
+                }
+
+                return p;
+            })
+        );
+
+    } catch (err) {
+        console.error('Eroare:', err);
+    }
+}
+
   if (loading) {
     return <p>Se incarca...</p>;
   }
@@ -230,6 +262,15 @@ async function handleSave() {
       <span className={project.done ? 'status-done' : 'status-progress'}>
         {project.done ? ' - Finalizat' : ' - În lucru'}
       </span>
+
+      <button
+    className="toggle-button"
+    onClick={function() {
+        handleToggle(project._id, project.done);
+    }}
+>
+    {project.done ? 'Marchează ca în lucru' : 'Finalizează'}
+</button>
 
       <button
       className='edit-button'
