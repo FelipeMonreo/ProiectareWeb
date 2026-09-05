@@ -1,10 +1,12 @@
+require('dotenv').config();
+
 const express = require('express');
 const Project = require('./models/Project');
 const cors = require('cors');
 const app = express();
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/dashboard')
+mongoose.connect(process.env.MONGO_URI)
   .then(function() {
     console.log('Conectat la MongoDB!');
   })
@@ -14,7 +16,7 @@ mongoose.connect('mongodb://localhost:27017/dashboard')
 app.use (cors());
 app.use(express.json());
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000
 
 app.get('/', function(req, res) {
     res.json({ message: 'Serverul functioneaza!' });
