@@ -22,7 +22,7 @@ function ProjectList() {
   }).length;
 
   useEffect(function() {
-    fetch('http://localhost:3000/api/projects')
+    fetch('https://proiectarewebbackend.onrender.com/api/projects')
       .then(function(response) {
         if (!response.ok) {
           throw new Error('Eroare la încărcarea datelor.');
@@ -44,7 +44,7 @@ function ProjectList() {
     event.preventDefault();
 
     try {
-        const response = await fetch('http://localhost:3000/api/projects', {
+        const response = await fetch('https://proiectarewebbackend.onrender.com/api/projects', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -73,7 +73,7 @@ async function handleDelete(id) {
         return;
     }
     try {
-        await fetch('http://localhost:3000/api/projects/' + id, {
+        await fetch('https://proiectarewebbackend.onrender.com/api/projects/' + id, {
             method: 'DELETE'
         });
 
@@ -90,7 +90,7 @@ async function handleDelete(id) {
 async function handleToggle(id, currentDone) {
     try {
         const response = await fetch(
-            'http://localhost:3000/api/projects/' + id,
+            'https://proiectarewebbackend.onrender.com/api/projects/' + id,
             {
                 method: 'PUT',
                 headers: {
@@ -135,7 +135,7 @@ async function handleToggle(id, currentDone) {
 
 async function handleSave() {
     const response = await fetch(
-        'http://localhost:3000/api/projects/' + editingId,
+        'https://proiectarewebbackend.onrender.com/api/projects/' + editingId,
         {
             method: 'PUT',
             headers: {

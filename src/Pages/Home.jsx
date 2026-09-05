@@ -7,7 +7,7 @@ function Home() {
 
     useEffect(function() {
 
-        fetch('http://localhost:3000/api/stats')
+        fetch('https://proiectarewebbackend.onrender.com/api/stats')
 
             .then(function(response) {
                 return response.json();
