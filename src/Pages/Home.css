@@ -1,0 +1,205 @@
+.home {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 0 40px;
+}
+
+.home h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.home h3 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.stats-title {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    padding: 25px;
+    text-align: center;
+    border: 2px solid #ccc;
+    border-radius: 12px;
+    background: #f5f5f5;
+}
+
+.stat-card p {
+    font-size: 18px;
+    margin: 0 0 10px;
+}
+
+.stat-card strong {
+    font-size: 28px;
+}
+
+.components-title {
+    text-align: center;
+    border-top: 2px solid #ccc;
+    padding-top: 15px;
+    margin-bottom: 20px;
+}
+
+.components {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.card {
+    border: 2px solid #ccc;
+    border-radius: 12px;
+    padding: 25px;
+    min-height: 120px;
+    box-sizing: border-box;
+}
+
+.card h3 {
+    margin-top: 0;
+}
+
+.clock {
+    text-align: center;
+}
+
+.clock p {
+    font-size: 20px;
+}
+
+/* CONTOR - acelasi stil ca celelalte carduri */
+
+.components .card.counter {
+    background: #15161c !important;
+    background-color: #15161c !important;
+
+    border: 2px solid #cccccc !important;
+    border-radius: 18px !important;
+
+    box-sizing: border-box;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    text-align: center !important;
+
+    padding: 30px !important;
+
+    color: #aebbd0;
+}
+
+.components .card.counter h3 {
+    margin: 0 0 15px 0 !important;
+    font-size: 28px;
+}
+
+.components .card.counter p {
+    margin: 0 0 20px 0 !important;
+    font-size: 20px;
+}
+
+.counter-buttons {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    gap: 10px !important;
+}
+
+.counter-buttons button {
+    padding: 8px 14px !important;
+
+    border: none !important;
+    border-radius: 6px !important;
+
+    background: #777 !important;
+    color: white !important;
+
+    font-size: 16px !important;
+
+    cursor: pointer;
+}
+
+.counter-buttons button:hover {
+    opacity: 0.85;
+}
+
+.note {
+    text-align: center;
+}
+
+.note input {
+    width: 70%;
+    padding: 8px;
+}
+
+.todo input {
+    padding: 8px;
+    width: 65%;
+}
+
+.todo button {
+    padding: 8px 12px;
+    margin-left: 5px;
+}
+
+.todo ul {
+    margin-top: 15px;
+}
+
+.api-card {
+    grid-column: 1 / -1;
+}
+
+.api-card input {
+    display: block;
+    width: 55%;
+    margin: 0 auto 15px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.api-card ul {
+    line-height: 1.8;
+}
+
+.card button {
+    border: none;
+    border-radius: 6px;
+    padding: 8px 14px;
+    cursor: pointer;
+}
+
+.card button:hover {
+    opacity: 0.85;
+}
+
+
+@media (max-width: 700px) {
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .components {
+        grid-template-columns: 1fr;
+    }
+
+    .api-card {
+        grid-column: auto;
+    }
+
+}
